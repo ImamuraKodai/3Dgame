@@ -1,0 +1,9 @@
+﻿  camera.cpp
+camera.cpp(168): warning C4101: 'pModel': ローカル変数は 1 度も使われていません。
+  コード生成しています。
+  3 of 99 functions ( 3.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  Win32Project002.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\Win32Project002\Win32Project002.exe
+  Win32Project002.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\Win32Project002\Win32Project002.pdb (Full PDB)

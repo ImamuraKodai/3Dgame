@@ -1,0 +1,13 @@
+﻿  renderer.cpp
+c:\users\student\documents\visual studio 2015\projects\win32project002\main.h(6): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  manager.cpp
+c:\users\student\documents\visual studio 2015\projects\win32project002\manager.cpp(8): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  main.cpp
+c:\users\student\documents\visual studio 2015\projects\win32project002\main.h(6): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  input.cpp
+c:\users\student\documents\visual studio 2015\projects\win32project002\renderer.h(5): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Object2D.cpp
+c:\users\student\documents\visual studio 2015\projects\win32project002\object2d.cpp(8): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Object.cpp
+c:\users\student\documents\visual studio 2015\projects\win32project002\main.h(6): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  コードを生成中...

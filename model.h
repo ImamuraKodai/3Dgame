@@ -1,0 +1,64 @@
+#ifndef _MODEL_H_
+#define _MODEL_H_
+
+#include"main.h"
+#include"manager.h"
+#include"Object.h"
+
+//マクロ定義
+#define MODELSIZE (0.0f)
+
+//モデルの状態
+typedef enum
+{
+	PLAYERSTATE_APPEAR, //出現状態(点滅)
+	PLAYERSTATE_NORMAL, //通常状態
+	PLAYERSTATE_DAMAGE, //ダメージ状態
+	PLAYERSTATE_WAIT,   //出現待ち状態(表示なし)
+	PLAYERSTATE_DEATH,  //死亡状態
+	PLAYERSTATE_MAX
+}PLAYERSTATE;
+
+//===================================
+//モデルクラス
+//===================================
+class CModel :public CObject
+{
+public:
+	CModel();
+	~CModel();
+
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+	void Draw(void);
+	/*void HitModel(int nDamage);*/
+	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
+	void GetModel(void);
+	static CModel *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
+
+protected:
+	static LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	//頂点バッファ
+
+private:
+
+	D3DXVECTOR3 m_pos; //位置
+
+	D3DXVECTOR3 m_move; //移動量
+
+	D3DXVECTOR3 m_rot; //向き
+
+	D3DXVECTOR3 m_RotDest; //目的の向き
+
+	float fDirection; //距離
+
+	PLAYERSTATE state; //プレイヤーの状態
+
+	int nCounterState; //ダメージ状態
+
+	int nLife;         //体力　
+
+	bool m_bUse;	   //使っているかどうか
+};
+
+#endif
