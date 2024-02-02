@@ -16,6 +16,8 @@ public:
 	void Update(void);
 	void Draw(void);
 	void SetCamera(void);
+	void SetCamera(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
+	CModel * pModel;
 
 private:
 	D3DXMATRIX m_mtxView;		//ビューマトリックス

@@ -34,7 +34,6 @@ public:
 	void Draw(void);
 	/*void HitModel(int nDamage);*/
 	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
-	void GetModel(void);
 	static CModel *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
 
 protected:

@@ -350,9 +350,3 @@ void CModel::Draw(void)
 	//保存していたマテリアルを戻す
 	pDevice->SetMaterial(&matDef);
 }
-
-//モデルの情報を取得
-void CModel::GetModel(void)
-{
-	m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);  //位置
-}
