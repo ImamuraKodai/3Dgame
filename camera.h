@@ -4,9 +4,10 @@
 #include "main.h"
 #include "manager.h"
 #include "Object.h"
+#include "model.h"
 
 //カメラクラス
-class CCamera
+class CCamera 
 {
 public:
 	CCamera();
@@ -17,7 +18,7 @@ public:
 	void Draw(void);
 	void SetCamera(void);
 	void SetCamera(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
-	CModel * pModel;
+	static CCamera *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
 
 private:
 	D3DXMATRIX m_mtxView;		//ビューマトリックス
@@ -27,6 +28,7 @@ private:
 	D3DXVECTOR3 m_posR;			//注視点
 	D3DXVECTOR3 m_posU;			//上方向ベクトル
 	D3DXVECTOR3 rot;			//向き
+	D3DXVECTOR3 move;           //移動量
 	D3DXVECTOR3 playerpos;	    //プレイヤーの場所
 	D3DXVECTOR3 posVDest;		//目的の視点
 	D3DXVECTOR3 posRDest;		//目的の注視点

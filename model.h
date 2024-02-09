@@ -32,24 +32,30 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	void HandleCollision();
 	/*void HitModel(int nDamage);*/
-	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
 	static CModel *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
+
+	D3DXVECTOR3 GetMove(void);
+
+	D3DXVECTOR3 GetPos(void);
 
 protected:
 	static LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	//頂点バッファ
 
 private:
 
-	D3DXVECTOR3 m_pos; //位置
+	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
 
+	D3DXVECTOR3 m_pos; //位置
+	
 	D3DXVECTOR3 m_move; //移動量
 
 	D3DXVECTOR3 m_rot; //向き
 
 	D3DXVECTOR3 m_RotDest; //目的の向き
 
-	float fDirection; //距離
+	float distance;	   //距離
 
 	PLAYERSTATE state; //プレイヤーの状態
 

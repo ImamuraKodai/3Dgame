@@ -13,6 +13,7 @@ class CObject;
 class CCamera;
 class CLight;
 class CModel;
+class CCone;
 
 //マネージャークラス
 class CManager
@@ -31,7 +32,6 @@ public:
 	static CInputKeyboard *GetKeyboard(void); //キーボードの取得
 	static CCamera *GetCamera(void);          //カメラの取得
 	static CLight *GetLight(void);            //ライトの取得
-	static CModel *GetModel(void);            //モデルの取得
 
 private:
 	static CRenderer *m_pRenderer;			  //レンダラー
@@ -41,6 +41,7 @@ private:
 	static CCamera * m_pCamera;				  //カメラ
 	static CLight * m_pLight;                 //ライト
 	static CModel * m_pModel;                 //モデル
+	static CCone * m_pCone;                   //コーン
 };
 
 #endif

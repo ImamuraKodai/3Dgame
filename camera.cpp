@@ -22,15 +22,37 @@ CCamera::~CCamera()
 
 }
 
+//==============================================================
+//生成処理
+//==============================================================
+CCamera * CCamera::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType)
+{
+	//モデルのポインタ
+	CCamera * pModel;
+
+	//3Dオブジェクトの生成
+	pModel = new CCamera;
+
+	//3Dオブジェクトの初期化処理
+	pModel->Init();
+
+	//3Dオブジェクトの位置
+	pModel->SetCamera(pos, rot, nType);
+
+	//値を返す
+	return pModel;
+}
+
 //カメラの初期化処理
 HRESULT CCamera::Init(void)
 {
-	m_posV = D3DXVECTOR3(0.0f, 100.0f, -100.0f);   //視点
-	m_posR = D3DXVECTOR3(0.0f, 0.0f, 0.0f);        //注視点
+	m_posV = D3DXVECTOR3(0.0f, 75.0f, 50.0f);      //視点
+	m_posR = D3DXVECTOR3(0.0f, 0.1f, 0.0f);        //注視点
 	m_posU = D3DXVECTOR3(0.0f, 1.0f, 0.0f);        //上方向ベクトル
 	fDistance = (100.0f);						   //距離
 	rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);		   //向き
-	playerpos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);     //プレイヤーの位置
+	move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);          //移動量
+	playerpos = D3DXVECTOR3(0.0f, 1.0f, 5.0f);     //プレイヤーの位置
 	posVDest = D3DXVECTOR3(0.0f, 100.0f, -100.0f); //目的の視点
 	posRDest = D3DXVECTOR3(0.0f, 0.0f, 0.0f);      //目的の注視点
 	posMove = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	   //移動量
@@ -155,10 +177,22 @@ void CCamera::Update(void)
 
 		m_posR.x = m_posV.x - cosf(rot.y) * fDistance;
 		m_posR.z = m_posV.z - sinf(rot.y) * fDistance;
-	}
+	};
+
+	//モデルの情報
+	CModel* p = (CModel*)CObject::m_apObject[1];
+	D3DXVECTOR3 pos = p->GetPos();
+
+	//m_posV.x = move.x;
+	//m_posV.y = move.y;
+	//m_posV.z = move.z;
+
+	m_posR.x = pos.x;
+	m_posR.y = pos.y;
+	m_posR.z = pos.z;
 
 	//視点の慣性
-	m_posV.x = m_posR.x;
+	/*m_posV.x = m_posR.x;*/
 
 	m_posV.z = m_posR.z - 150.0f;
 }
@@ -174,7 +208,7 @@ void CCamera::SetCamera(void)
 {
 	//デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
-
+	
 	//プロジェクションマトリックスの初期化
 	D3DXMatrixIdentity(&m_mtxProjection);
 
@@ -208,19 +242,15 @@ void CCamera::SetCamera(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType)
 {
 	m_posR = pos;
 
+	D3DXVECTOR3 posMove;
+
 	posMove = D3DXVECTOR3(5.0f, 0.0f, 5.0f); //移動量
 
 	//目的の注視点を設定
-	m_posV.x = posMove.x + m_posR.x;
-	m_posV.z = posMove.z + m_posR.z;
+	//m_posV.x = posMove.x + m_posR.x;
+	//m_posV.z = posMove.z + m_posR.z;
 
-	//目的の視点を設定
-	m_posR.x = pos.x + m_posV.x;
-	m_posR.z = pos.z + m_posV.z;
-
-	//モデルの情報
-	CModel * pModel;
-
-	//注視点の完成
-	pModel->SetPosition(pos, rot, nType);
+	////目的の視点を設定
+	//m_posR.x = pos.x + m_posV.x;
+	//m_posR.z = pos.z + m_posV.z;
 }

@@ -11,6 +11,15 @@
 class CObject
 {
 public:
+
+	//プレイヤーの状態
+	typedef enum
+	{
+		TYPE_NOMAL,
+		TYPE_MODEL, //出現状態(点滅)
+		PLAYERSTATE_MAX
+	}TYPE;
+
 	CObject();  //コンストラクタ
 	virtual ~CObject(); //デストラクタ
 
@@ -29,6 +38,8 @@ public:
 
 protected:
 	void Release(void); //オブジェクトの破棄
+
+	TYPE m_type;
 
 public:
 	static CObject *m_apObject[MAX_OBJECT]; //オブジェクトの総数

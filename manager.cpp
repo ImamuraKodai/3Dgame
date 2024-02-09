@@ -16,6 +16,7 @@
 #include"3Dobject.h"
 #include"light.h"
 #include"model.h"
+#include"cone.h"
 
 //静的メンバ変数
 CRenderer * CManager::m_pRenderer = NULL;
@@ -24,6 +25,7 @@ CManager * pManager = NULL;
 CCamera * CManager::m_pCamera = NULL;
 CLight * CManager::m_pLight = NULL;
 CModel * CManager::m_pModel = NULL;
+CCone * CManager::m_pCone = NULL;
 
 //コンストラクタ
 CManager::CManager()
@@ -93,7 +95,15 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	//モデルの生成
 	CModel * pModel = CModel::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 4);
 
-	/*CCamera * m_pCamera = CCamera::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 4);*/
+	//カメラの生成
+	CCamera * m_pCamera = CCamera::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 5);
+
+	//コーンの生成
+	CCone * m_pCone = CCone::Create(D3DXVECTOR3(200.0f, 0.0f, 200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 6);
+
+	m_pCone = CCone::Create(D3DXVECTOR3(500.0f, 0.0f, 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 7);
+
+	m_pCone = CCone::Create(D3DXVECTOR3(200.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
 
 	return S_OK;
 }
@@ -153,7 +163,7 @@ void CManager::Uninit(void)
 void CManager::Update(void)
 {
 	//オブジェクトの更新処理
-	CObject::UpdateAll();
+	//CObject::UpdateAll();
 
 	//レンダラーの更新処理
 	m_pRenderer->Update();

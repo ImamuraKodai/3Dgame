@@ -9,6 +9,7 @@
 #include "camera.h"
 #include "Object.h"
 #include "3Dobject.h"
+#include "cone.h"
 
 //グローバル変数
 LPD3DXMESH g_pMeshModel = NULL;      //メッシュ(頂点情報)へのポインタ
@@ -16,10 +17,6 @@ LPD3DXBUFFER g_pBuffMatModel = NULL; //マテリアルへのポインタ
 DWORD g_dwNumMatModel = 0;           //マテリアルの数
 D3DXMATRIX g_mtxWorldModel;          //ワールドマトリックス
 int g_nIdxShadow = -1;               //対象の影のインデックス(番号)
-#define WALLSIZE (390)
-#define SCREEN_X_LEFT (-390)
-#define SCREEN_Z (390)
-#define SCREEN_Z_TOP (-390)
 
 //================================================================
 //静的メンバ関数
@@ -31,7 +28,7 @@ LPDIRECT3DVERTEXBUFFER9 CModel::m_pVtxBuff = NULL; //頂点バッファのポインタ
 //==============================================================
 CModel::CModel()
 {
-
+	m_type = TYPE_MODEL;
 }
 
 //==============================================================
@@ -45,10 +42,10 @@ CModel::~CModel()
 //==============================================================
 //生成処理
 //==============================================================
-CModel * CModel::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType)
+CModel* CModel::Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType)
 {
 	//モデルのポインタ
-	CModel * pModel;
+	CModel* pModel;
 
 	//3Dオブジェクトの生成
 	pModel = new CModel;
@@ -180,6 +177,8 @@ void CModel::Uninit(void)
 //=======================================================================
 void CModel::Update(void)
 {
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice(); //デバイスの取得
+
 	//プレイヤーの移動
 	CInputKeyboard * pInputKeyboard;
 
@@ -193,18 +192,20 @@ void CModel::Update(void)
 		{//左上移動
 			m_pos.x += sinf(-D3DX_PI *0.75f)*2.0f;
 			m_pos.z -= cosf(-D3DX_PI *0.75f)*2.0f;
+			m_rot.y = D3DX_PI * 0.75f;
 		}
 
 		else if (pInputKeyboard->GetPress(DIK_S) == true)
 		{//左下移動
 			m_pos.x += sinf(-D3DX_PI *0.25f)*2.0f;
 			m_pos.z -= cosf(-D3DX_PI *0.25f)*2.0f;
+			m_rot.y = D3DX_PI * 0.25f;
 		}
 
 		else
 		{//左移動
 			m_pos.x += sinf(-D3DX_PI *0.5f)*2.0f;
-			m_pos.y = D3DX_PI * 0.5;
+			m_rot.y = D3DX_PI * 0.5;
 		}
 	}
 
@@ -215,12 +216,14 @@ void CModel::Update(void)
 		{//右上移動
 			m_pos.x += sinf(D3DX_PI *0.75f)*2.0f;
 			m_pos.z -= cosf(D3DX_PI *0.75f)*2.0f;
+			m_rot.y = D3DX_PI * -0.75f;
 		}
 
 		else if (pInputKeyboard->GetPress(DIK_S) == true)
 		{//右下移動
 			m_pos.x += sinf(D3DX_PI *0.25f)*2.0f;
 			m_pos.z -= cosf(D3DX_PI *0.25f)*2.0f;
+			m_rot.y = D3DX_PI * -0.25f;
 		}
 
 		else
@@ -281,29 +284,11 @@ void CModel::Update(void)
 	////影の位置を設定
 	//SetPositionShadow(g_nIdxShadow, g_Model.pos, SHADOWTYPE_MODEL);
 
-	if (m_pos.x > WALLSIZE)
-	{
-		//終点(X座標)が画面の端に当たった
-		m_pos.x = WALLSIZE;
-	}
+	//コーンとの当たり判定
+	CModel::HandleCollision();
 
-	else if (m_pos.x < SCREEN_X_LEFT)
-	{
-		//終点(X座標)が画面の端に当たった
-		m_pos.x = SCREEN_X_LEFT;
-	}
-
-	if (m_pos.z > SCREEN_Z)
-	{
-		//Z座標が画面の端に当たった
-		m_pos.z = SCREEN_Z;
-	}
-
-	else if (m_pos.z < SCREEN_Z_TOP)
-	{
-		//Z座標が画面の端に当たった
-		m_pos.z = SCREEN_Z_TOP;
-	}
+	//pDevice->EndScene();
+	//pDevice->Present(NULL, NULL, NULL, NULL);
 }
 
 //モデルの描画処理
@@ -349,4 +334,56 @@ void CModel::Draw(void)
 	}
 	//保存していたマテリアルを戻す
 	pDevice->SetMaterial(&matDef);
+}
+
+ D3DXVECTOR3 CModel::GetMove(void)
+{
+	 return m_move;
+}
+
+ D3DXVECTOR3 CModel::GetPos(void)
+ {
+	 return m_pos;
+ }
+
+ //==================================================
+ //コーンとの当たり判定処理
+ //==================================================
+void CModel::HandleCollision()
+{
+	CCone* m = (CCone*)CObject::m_apObject[1]/*->m_type*/;
+
+	//for (int nCntObject = 0; nCntObject < MAX_OBJECT; nCntObject++)
+	//{
+	//	if (m_apObject[nCntObject] == NULL)
+	//	{
+	//		m_apObject[nCntObject] = this;		   //自分自身を代入
+
+	//		m_nID = MAX_OBJECT;					   //自分自身のIDを保存
+
+	//		m_nNumAll++;						   //総数をカウントアップ
+
+	//		m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f); //プレイヤーの位置
+
+	//		break;
+	//	}
+	//}
+
+	D3DXVECTOR3 pos = m->GetPos();
+
+	 //オブジェクト同士の距離を計算
+	distance = D3DXVec3Length(&(m_pos - pos));
+
+	//距離が一定の場合は当たり判定とみなす
+	if (distance < 1.0f)
+	{
+		//当たり判定が発生した際の処理
+
+		//押し戻すベクトルを計算
+		D3DXVECTOR3 pushBackVector = m_pos - pos;
+		D3DXVec3Normalize(&pushBackVector, &pushBackVector);
+
+		//オブジェクトを押し戻す
+		m_pos += pushBackVector * 0.5f; 
+	}
 }
