@@ -351,39 +351,52 @@ void CModel::Draw(void)
  //==================================================
 void CModel::HandleCollision()
 {
-	CCone* m = (CCone*)CObject::m_apObject[1]/*->m_type*/;
+	CCone* m = (CCone*)CObject::m_apObject[1];
 
-	//for (int nCntObject = 0; nCntObject < MAX_OBJECT; nCntObject++)
-	//{
-	//	if (m_apObject[nCntObject] == NULL)
-	//	{
-	//		m_apObject[nCntObject] = this;		   //自分自身を代入
-
-	//		m_nID = MAX_OBJECT;					   //自分自身のIDを保存
-
-	//		m_nNumAll++;						   //総数をカウントアップ
-
-	//		m_pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f); //プレイヤーの位置
-
-	//		break;
-	//	}
-	//}
-
-	D3DXVECTOR3 pos = m->GetPos();
-
-	 //オブジェクト同士の距離を計算
-	distance = D3DXVec3Length(&(m_pos - pos));
-
-	//距離が一定の場合は当たり判定とみなす
-	if (distance < 1.0f)
+	for (int nCntObject = 0; nCntObject < MAX_OBJECT; nCntObject++)
 	{
-		//当たり判定が発生した際の処理
+		if (m_apObject[nCntObject] == NULL)
+		{
+			m_nNumAll++; //総数をカウントアップ
+			
+			D3DXVECTOR3 pos = m->GetPos();
 
-		//押し戻すベクトルを計算
-		D3DXVECTOR3 pushBackVector = m_pos - pos;
-		D3DXVec3Normalize(&pushBackVector, &pushBackVector);
+			if (distance = D3DXVec3Length(&(m_pos - pos)))
+			{
+				//距離が一定の場合は当たり判定とみなす
+				if (distance < 1.0f)
+				{
+					//当たり判定が発生した際の処理
 
-		//オブジェクトを押し戻す
-		m_pos += pushBackVector * 0.5f; 
+					//押し戻すベクトルを計算
+					D3DXVECTOR3 pushBackVector = m_pos - pos;
+					D3DXVec3Normalize(&pushBackVector, &pushBackVector);
+
+					//オブジェクトを押し戻す
+					m_pos += pushBackVector * 0.5f;
+
+					m_bUse = true;
+				}
+			}
+			m_bUse = false;
+		}
 	}
+
+	//D3DXVECTOR3 pos = m->GetPos();
+
+	// //オブジェクト同士の距離を計算
+	//distance = D3DXVec3Length(&(m_pos - pos));
+
+	////距離が一定の場合は当たり判定とみなす
+	//if (distance < 1.0f)
+	//{
+	//	//当たり判定が発生した際の処理
+
+	//	//押し戻すベクトルを計算
+	//	D3DXVECTOR3 pushBackVector = m_pos - pos;
+	//	D3DXVec3Normalize(&pushBackVector, &pushBackVector);
+
+	//	//オブジェクトを押し戻す
+	//	m_pos += pushBackVector * 0.5f; 
+	//}
 }
