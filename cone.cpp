@@ -18,7 +18,7 @@ LPDIRECT3DVERTEXBUFFER9 CCone::m_pVtxBuff = NULL; //頂点バッファのポインタ
 //==================================
 CCone::CCone()
 {
-
+	m_type = TYPE_CONE;
 }
 
 //===================================
@@ -232,4 +232,12 @@ void CCone::Draw(void)
 D3DXVECTOR3 CCone::GetPos(void)
 {
 	return m_pos;
+}
+
+//=====================================================
+//移動量の取得
+//=====================================================
+D3DXVECTOR3 CCone::GetMove(void)
+{
+	return m_move;
 }

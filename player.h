@@ -8,21 +8,9 @@ class CPlayer : public CObject2D
 {
 public:
 
-	//プレイヤーの状態
-	typedef enum
-	{
-		PLAYERSTATE_APPEAR, //出現状態(点滅)
-		PLAYERSTATE_NORMAL, //通常状態
-		PLAYERSTATE_DAMAGE, //ダメージ状態
-		PLAYERSTATE_WAIT,   //出現待ち状態(表示なし)
-		PLAYERSTATE_DEATH,  //死亡状態
-		PLAYERSTATE_MAX
-	}PLAYERSTATE;
-
 	D3DXVECTOR3 move;  //移動
 	D3DXVECTOR3 rot;   //向き
 	bool bDisp;        //使っているかどうか
-	PLAYERSTATE state; //プレイヤーの状態
 	int nCounterState; //ダメージ状態
 	int nAppearCounter;//出現状態
 	int nLife;         //体力　

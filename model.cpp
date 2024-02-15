@@ -277,18 +277,12 @@ void CModel::Update(void)
 	m_pos.x += m_move.x; //x座標
 	m_pos.y += m_move.y; //y座標
 
-	//移動量を更新(減退させる)
-	m_move.x += (0.0f - m_move.x)*0.3f; //x座標
-	m_move.y += (0.0f - m_move.y)*0.3f; //y座標
+	////移動量を更新(減退させる)
+	//m_move.x += (0.0f - m_move.x)*0.3f; //x座標
+	//m_move.y += (0.0f - m_move.y)*0.3f; //y座標
 
 	////影の位置を設定
 	//SetPositionShadow(g_nIdxShadow, g_Model.pos, SHADOWTYPE_MODEL);
-
-	//コーンとの当たり判定
-	CModel::HandleCollision();
-
-	//pDevice->EndScene();
-	//pDevice->Present(NULL, NULL, NULL, NULL);
 }
 
 //モデルの描画処理
@@ -334,6 +328,9 @@ void CModel::Draw(void)
 	}
 	//保存していたマテリアルを戻す
 	pDevice->SetMaterial(&matDef);
+
+	//コーンとの当たり判定
+	CModel::HandleCollision();
 }
 
  D3DXVECTOR3 CModel::GetMove(void)
@@ -351,52 +348,33 @@ void CModel::Draw(void)
  //==================================================
 void CModel::HandleCollision()
 {
-	CCone* m = (CCone*)CObject::m_apObject[1];
-
 	for (int nCntObject = 0; nCntObject < MAX_OBJECT; nCntObject++)
 	{
-		if (m_apObject[nCntObject] == NULL)
+		if (m_apObject[nCntObject] != NULL)
 		{
-			m_nNumAll++; //総数をカウントアップ
-			
-			D3DXVECTOR3 pos = m->GetPos();
-
-			if (distance = D3DXVec3Length(&(m_pos - pos)))
+			if (m_apObject[nCntObject]->GetType() == TYPE_CONE)
 			{
-				//距離が一定の場合は当たり判定とみなす
-				if (distance < 1.0f)
-				{
-					//当たり判定が発生した際の処理
+				CCone* m = (CCone*)CObject::m_apObject[nCntObject];
 
+				D3DXVECTOR3 pos = m->GetPos();
+
+				distance = D3DXVec3Length(&(m_pos - pos));
+
+				CCone* a = (CCone*)CObject::m_apObject[nCntObject];
+
+				D3DXVECTOR3 move = a->GetMove();
+
+				//距離が一定の場合は当たり判定とみなす
+				if (distance < 50.0f)
+				{
 					//押し戻すベクトルを計算
 					D3DXVECTOR3 pushBackVector = m_pos - pos;
 					D3DXVec3Normalize(&pushBackVector, &pushBackVector);
 
 					//オブジェクトを押し戻す
-					m_pos += pushBackVector * 0.5f;
-
-					m_bUse = true;
+					m_pos += pushBackVector * 1.0f;
 				}
 			}
-			m_bUse = false;
 		}
 	}
-
-	//D3DXVECTOR3 pos = m->GetPos();
-
-	// //オブジェクト同士の距離を計算
-	//distance = D3DXVec3Length(&(m_pos - pos));
-
-	////距離が一定の場合は当たり判定とみなす
-	//if (distance < 1.0f)
-	//{
-	//	//当たり判定が発生した際の処理
-
-	//	//押し戻すベクトルを計算
-	//	D3DXVECTOR3 pushBackVector = m_pos - pos;
-	//	D3DXVec3Normalize(&pushBackVector, &pushBackVector);
-
-	//	//オブジェクトを押し戻す
-	//	m_pos += pushBackVector * 0.5f; 
-	//}
 }

@@ -8,17 +8,6 @@
 //マクロ定義
 #define MODELSIZE (0.0f)
 
-//モデルの状態
-typedef enum
-{
-	PLAYERSTATE_APPEAR, //出現状態(点滅)
-	PLAYERSTATE_NORMAL, //通常状態
-	PLAYERSTATE_DAMAGE, //ダメージ状態
-	PLAYERSTATE_WAIT,   //出現待ち状態(表示なし)
-	PLAYERSTATE_DEATH,  //死亡状態
-	PLAYERSTATE_MAX
-}PLAYERSTATE;
-
 //===================================
 //モデルクラス
 //===================================
@@ -40,6 +29,11 @@ public:
 
 	D3DXVECTOR3 GetPos(void);
 
+	void ExampleFunction() {
+		int value = GetType();
+		// m_typeにアクセスできる
+	}
+
 protected:
 	static LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	//頂点バッファ
 
@@ -56,8 +50,6 @@ private:
 	D3DXVECTOR3 m_RotDest; //目的の向き
 
 	float distance;	   //距離
-
-	PLAYERSTATE state; //プレイヤーの状態
 
 	int nCounterState; //ダメージ状態
 

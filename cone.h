@@ -24,6 +24,7 @@ public:
 	void Draw(void);
 	static CCone *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int Type);
 	D3DXVECTOR3 GetPos(void);
+	D3DXVECTOR3 GetMove(void);
 
 protected:
 	static LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	//頂点バッファ

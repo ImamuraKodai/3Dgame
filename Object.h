@@ -16,7 +16,8 @@ public:
 	typedef enum
 	{
 		TYPE_NOMAL,
-		TYPE_MODEL, //出現状態(点滅)
+		TYPE_MODEL, //出現状態
+		TYPE_CONE,  //コーン
 		PLAYERSTATE_MAX
 	}TYPE;
 
@@ -29,8 +30,7 @@ public:
 	virtual void Draw(void) = 0;    //ポリゴンの描画処理
 
 	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType); //位置と種類	
-
-	/*virtual void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType) = 0;*/
+	TYPE GetType() const { return m_type; }
 
 	static void ReleaseAll(void); //すべてのオブジェクトの破棄
 	static void UpdateAll(void);  //すべての更新処理
@@ -38,7 +38,6 @@ public:
 
 protected:
 	void Release(void); //オブジェクトの破棄
-
 	TYPE m_type;
 
 public:

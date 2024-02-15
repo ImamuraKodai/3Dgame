@@ -101,9 +101,13 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	//ÉRÅ[ÉìÇÃê∂ê¨
 	CCone * m_pCone = CCone::Create(D3DXVECTOR3(200.0f, 0.0f, 200.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 6);
 
-	m_pCone = CCone::Create(D3DXVECTOR3(500.0f, 0.0f, 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 7);
+	//m_pCone = CCone::Create(D3DXVECTOR3(500.0f, 0.0f, 500.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 7);
 
-	m_pCone = CCone::Create(D3DXVECTOR3(200.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
+	//m_pCone = CCone::Create(D3DXVECTOR3(200.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
+
+	//m_pCone = CCone::Create(D3DXVECTOR3(600.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
+
+	//m_pCone = CCone::Create(D3DXVECTOR3(-600.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
 
 	return S_OK;
 }

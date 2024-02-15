@@ -192,7 +192,7 @@ void CCamera::Update(void)
 	m_posR.z = pos.z;
 
 	//éãì_ÇÃäµê´
-	/*m_posV.x = m_posR.x;*/
+	m_posV.x = m_posR.x;
 
 	m_posV.z = m_posR.z - 150.0f;
 }
