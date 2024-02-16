@@ -23,6 +23,7 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cone.cpp" />
+    <ClCompile Include="fade].cpp" />
     <ClCompile Include="goal.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="light.cpp" />
@@ -33,12 +34,15 @@
     <ClCompile Include="Object2D.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="renderer.cpp" />
+    <ClCompile Include="result.cpp" />
+    <ClCompile Include="title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3Dobject.h" />
     <ClInclude Include="block.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cone.h" />
+    <ClInclude Include="fade.h" />
     <ClInclude Include="goal.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="light.h" />
@@ -49,6 +53,8 @@
     <ClInclude Include="Object2D.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="result.h" />
+    <ClInclude Include="title.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A2D2DA53-7A8B-4CAE-AC99-E86D44CC22AC}</ProjectGuid>
