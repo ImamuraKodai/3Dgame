@@ -1,6 +1,6 @@
 //==================
 //
-//文字を出力する処理[manager.cpp]
+//マネージャーの処理[manager.cpp]
 //Aoutor:今村晃大
 //
 //==================
@@ -17,6 +17,7 @@
 #include"light.h"
 #include"model.h"
 #include"cone.h"
+#include"goal.h"
 
 //静的メンバ変数
 CRenderer * CManager::m_pRenderer = NULL;
@@ -26,6 +27,7 @@ CCamera * CManager::m_pCamera = NULL;
 CLight * CManager::m_pLight = NULL;
 CModel * CManager::m_pModel = NULL;
 CCone * CManager::m_pCone = NULL;
+CGoal * CManager::m_pGoal = NULL;
 
 //コンストラクタ
 CManager::CManager()
@@ -108,6 +110,9 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	//m_pCone = CCone::Create(D3DXVECTOR3(600.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
 
 	//m_pCone = CCone::Create(D3DXVECTOR3(-600.0f, 0.0f, -100.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 8);
+
+	//ゴールの生成
+	CGoal * m_pGoal = CGoal::Create(D3DXVECTOR3(500.0f, 0.0f, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0.0f), 7);
 
 	return S_OK;
 }

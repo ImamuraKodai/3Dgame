@@ -35,8 +35,8 @@ private:
 
 	void MovePlayer(void); //プレイヤーの移動
 
-	int m_CounterAnim;								  //アニメーションカウンター
-	int m_PatternAnim;								  //アニメーションパターンNo.
+	int m_CounterAnim;	//アニメーションカウンター
+	int m_PatternAnim;	//アニメーションパターンNo.
 };
 
 #endif

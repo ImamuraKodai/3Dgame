@@ -1,6 +1,6 @@
 //==========================================================
 //
-//コーンを描画する処理[cone.cpp]
+//コーン処理[cone.cpp]
 //Aoutor:今村晃大
 //
 //==========================================================
@@ -132,7 +132,7 @@ HRESULT CCone::Init(void)
 		if (nCntConeModel == 0)
 		{
 			//Xファイルの読み込み
-			D3DXLoadMeshFromX("data\\MODEL\\conebar000.x",
+			D3DXLoadMeshFromX("data\\MODEL\\wall002.x",
 				D3DXMESH_SYSTEMMEM,
 				pDevice,
 				NULL,
@@ -141,11 +141,6 @@ HRESULT CCone::Init(void)
 				&m_dwNumMatCone,
 				&m_pMeshCone);
 		}
-
-		//D3DXMATERIAL * pMat; //マテリアルのポインタ
-
-		////マテリアル情報に対するポインタを取得
-		//pMat = (D3DXMATERIAL *)m_pMeshCone[nCntConeModel]->GetBufferPointer();
 	}
 
 	return S_OK;

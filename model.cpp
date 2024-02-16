@@ -10,6 +10,7 @@
 #include "Object.h"
 #include "3Dobject.h"
 #include "cone.h"
+#include "goal.h"
 
 //グローバル変数
 LPD3DXMESH g_pMeshModel = NULL;      //メッシュ(頂点情報)へのポインタ
@@ -330,7 +331,10 @@ void CModel::Draw(void)
 	pDevice->SetMaterial(&matDef);
 
 	//コーンとの当たり判定
-	CModel::HandleCollision();
+	CModel::WallCollision();
+
+	//ゴール判定
+	CModel::GoalCollision();
 }
 
  D3DXVECTOR3 CModel::GetMove(void)
@@ -343,10 +347,10 @@ void CModel::Draw(void)
 	 return m_pos;
  }
 
- //==================================================
- //コーンとの当たり判定処理
- //==================================================
-void CModel::HandleCollision()
+//==================================================
+//壁との当たり判定処理
+//==================================================
+void CModel::WallCollision()
 {
 	for (int nCntObject = 0; nCntObject < MAX_OBJECT; nCntObject++)
 	{
@@ -365,7 +369,41 @@ void CModel::HandleCollision()
 				D3DXVECTOR3 move = a->GetMove();
 
 				//距離が一定の場合は当たり判定とみなす
-				if (distance < 50.0f)
+				if (distance < 20.0f)
+				{
+					//押し戻すベクトルを計算
+					D3DXVECTOR3 pushBackVector = m_pos - pos;
+					D3DXVec3Normalize(&pushBackVector, &pushBackVector);
+
+					//オブジェクトを押し戻す
+					m_pos += pushBackVector * 1.0f;
+				}
+			}
+		}
+	}
+}
+
+//==============================================
+//ゴール判定
+//==============================================
+void CModel::GoalCollision()
+{
+		LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice(); //デバイスの取得
+
+	for (int nCntObject = 0; nCntObject < MAX_OBJECT; nCntObject++)
+	{
+		if (m_apObject[nCntObject] != NULL)
+		{
+			if (m_apObject[nCntObject]->GetType() == TYPE_GOAL)
+			{
+				CGoal* m = (CGoal*)CObject::m_apObject[nCntObject];
+
+				D3DXVECTOR3 pos = m->GetPos();
+
+				distance = D3DXVec3Length(&(m_pos - pos));
+
+				//距離が一定の場合は当たり判定とみなす
+				if (distance < 20.0f)
 				{
 					//押し戻すベクトルを計算
 					D3DXVECTOR3 pushBackVector = m_pos - pos;

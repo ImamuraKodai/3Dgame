@@ -18,6 +18,7 @@ public:
 		TYPE_NOMAL,
 		TYPE_MODEL, //出現状態
 		TYPE_CONE,  //コーン
+		TYPE_GOAL,  //ゴール
 		PLAYERSTATE_MAX
 	}TYPE;
 

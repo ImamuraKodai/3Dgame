@@ -6,8 +6,7 @@
 #include"Object.h"
 
 //マクロ定義
-#define MAX_CONE  (128)   //オブジェクトの数
-#define MAX_CONEMODEL (1)
+#define MAX_CONE  (10)   //オブジェクトの数
 
 //============================================
 //コーンクラス
@@ -61,13 +60,9 @@ private:
 
 	LPDIRECT3DTEXTURE9 m_pTexture;	//テクスチャへのポインタ
 
-	CCone* g_aObstacleModel[MAX_CONEMODEL]; //エネミーモデルの種類
+	int nCntCone;	   //コーンのカウント
 
-	CCone* g_aEnemy[MAX_CONE];            //敵の情報
-
-	int nCntCone;	   //敵のカウント
-
-	int nCntConeModel; //モデルのカウント
+	int nCntConeModel; //コーンモデルのカウント
 
 	void SetPosition(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int Type); //位置情報
 };

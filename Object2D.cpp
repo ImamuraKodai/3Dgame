@@ -15,9 +15,9 @@
 #define NUM_OBJECT (4) //オブジェクトの種類
 
 //静的メンバ変数
-int CObject2D::m_NumObject = 0;					   //オブジェクトの総数
+int CObject2D::m_NumObject = 0;	//オブジェクトの総数
 
-												   //コンストラクタ
+//コンストラクタ
 CObject2D::CObject2D()
 {
 
@@ -58,7 +58,7 @@ HRESULT CObject2D::Init(void)
 	float fWidth = 30.0f;				   //幅
 	float fHeiht = 30.0f;				   //高さ
 
-										   //頂点バッファの生成
+	//頂点バッファの生成
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * MAX_OBJECT,
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_2D,
@@ -68,7 +68,7 @@ HRESULT CObject2D::Init(void)
 
 	VERTEX_2D *pVtx; //頂点バッファの設定
 
-					 //頂点バッファをロックする
+	//頂点バッファをロックする
 	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
 
 	//頂点座標の設定

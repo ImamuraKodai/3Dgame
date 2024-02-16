@@ -23,6 +23,7 @@
     <ClCompile Include="block.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cone.cpp" />
+    <ClCompile Include="goal.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
@@ -38,6 +39,7 @@
     <ClInclude Include="block.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cone.h" />
+    <ClInclude Include="goal.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="light.h" />
     <ClInclude Include="main.h" />

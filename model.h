@@ -21,7 +21,9 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
-	void HandleCollision();
+	void WallCollision();
+	void GoalCollision();
+
 	/*void HitModel(int nDamage);*/
 	static CModel *Create(D3DXVECTOR3 pos, D3DXVECTOR3 rot, int nType);
 

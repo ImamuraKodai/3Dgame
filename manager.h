@@ -14,6 +14,7 @@ class CCamera;
 class CLight;
 class CModel;
 class CCone;
+class CGoal;
 
 //マネージャークラス
 class CManager
@@ -42,6 +43,7 @@ private:
 	static CLight * m_pLight;                 //ライト
 	static CModel * m_pModel;                 //モデル
 	static CCone * m_pCone;                   //コーン
+	static CGoal * m_pGoal;                   //ゴール
 };
 
 #endif
